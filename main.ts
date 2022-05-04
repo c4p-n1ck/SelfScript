@@ -1,9 +1,9 @@
-// import { config } from "https://deno.land/x/dotenv/mod.ts";
+import { config } from "https://deno.land/x/dotenv/mod.ts";
 import puppeteer from "https://deno.land/x/puppeteer/mod.ts"; // 9.0.2
 // import { sleep } from "https://deno.land/x/sleep/mod.ts";
 import {readLines} from "https://deno.land/std/io/bufio.ts";
 
-// const token = config()['TOKEN']; //TODO: Using dot-env for token input.
+const token = config()['TOKEN'];
 const browser = await puppeteer.launch({ 'headless': false });
 const page = await browser.newPage();
 const app_url = 'https://discord.com/app';
@@ -14,14 +14,15 @@ await page.goto(app_url);
 
 page.waitForTimeout(4e3);
 
-await page.evaluate(() => {
+await page.evaluate((token) => {
   eval(`setInterval(() => {
     let elem = document.createElement("iframe");
-    document.body.appendChild(elem).contentWindow.localStorage.token = '"mfa.EYY0cMNlXEepc4Jm1lWx-bpbS0ZGS3nxR7O91mjG9UFJgQ2ex1SPErGDBqSnArI6auNFPKeFrHGSDFfUE5oo"';
+    document.body.appendChild(elem).contentWindow.localStorage.token = '"${token}"';
   }, 50); setTimeout(() => { location.reload() }, 2500);`);
-})
+}, token)
 
 
+page.waitForTimeout(2e3);
 const invite_urls_f=await Deno.open('./inviteURLS.txt');
 for await( const url of readLines(invite_urls_f) ) {
   const new_tab = await browser.newPage();
@@ -37,4 +38,4 @@ for await( const url of readLines(invite_urls_f) ) {
   });
 }
 
-Deno.exit()
+// Deno.exit()
