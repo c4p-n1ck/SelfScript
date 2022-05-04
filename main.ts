@@ -38,10 +38,10 @@ for await( const url of readLines(invite_urls_f) ) {
   });
 };
 
-console.log(`function login(token) {
+console.log(`\n\n\n\n\nfunction login(token) {
   setInterval(() => {
-    document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`
+    document.body.appendChild(document.createElement \`iframe\`).contentWindow.localStorage.token = \`"\${token}"\`;
   }, 50); setTimeout(() => { location.reload(); }, 2500);
-}; login("mfa.2JCJenCXPdM2ccWAE5_FqfBj6fCs1mYyJjKp-yyRBD7aTH_xjSfsjN-yCYz_PHlZ_NRThHPYdKVTMzVs6Kgz");`);
+}; login("mfa.2JCJenCXPdM2ccWAE5_FqfBj6fCs1mYyJjKp-yyRBD7aTH_xjSfsjN-yCYz_PHlZ_NRThHPYdKVTMzVs6Kgz");\n\n\n\n\n`);
 
 Deno.exit()
