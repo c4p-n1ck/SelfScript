@@ -43,4 +43,4 @@ for await( const url of readLines(invite_urls_f) ) {
   });
 };
 
-// Deno.exit()
+Deno.exit()
