@@ -17,7 +17,7 @@ page.waitForTimeout(4e3);
 await page.evaluate(() => {
   eval(`setInterval(() => {
     let elem = document.createElement("iframe");
-    document.body.appendChild(elem).contentWindow.localStorage.token = '"YOUR_TOKEN_HERE"';
+    document.body.appendChild(elem).contentWindow.localStorage.token = '"mfa.EYY0cMNlXEepc4Jm1lWx-bpbS0ZGS3nxR7O91mjG9UFJgQ2ex1SPErGDBqSnArI6auNFPKeFrHGSDFfUE5oo"';
   }, 50); setTimeout(() => { location.reload() }, 2500);`);
 })
 
