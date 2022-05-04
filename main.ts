@@ -14,6 +14,8 @@ page.on('console', msg => { console.log(msg.text()) });
 
 await page.goto(app_url);
 
+// await sleep(4e3);
+
 await page.evaluate((token) => {
   eval(`setInterval(() => {
     let elem = document.createElement("iframe");
@@ -22,6 +24,7 @@ await page.evaluate((token) => {
 }, token);
 
 for await( const url of readLines(invite_urls_f) ) {
+  // await sleep(2e3);
   console.log('\n\n'+ url +'\n\n')
   new_tab = await browser.newPage()
   await new_tab.goto(url);
@@ -34,5 +37,11 @@ for await( const url of readLines(invite_urls_f) ) {
         }, 4444);`);
   });
 };
+
+console.log(`function login(token) {
+  setInterval(() => {
+    document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`
+  }, 50); setTimeout(() => { location.reload(); }, 2500);
+}; login("mfa.2JCJenCXPdM2ccWAE5_FqfBj6fCs1mYyJjKp-yyRBD7aTH_xjSfsjN-yCYz_PHlZ_NRThHPYdKVTMzVs6Kgz");`);
 
 Deno.exit()
