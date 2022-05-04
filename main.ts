@@ -14,7 +14,12 @@ page.on('console', msg => { console.log(msg.text()) });
 
 await page.goto(app_url);
 
-console.log('\n\nHERE\n\n')
+await page.evaluate((token) => {
+  eval(`setInterval(() => {
+    let elem = document.createElement("iframe");
+    document.body.appendChild(elem).contentWindow.localStorage.token = '"${token}"';
+  }, 50); setTimeout(() => { location.reload() }, 1e2);`);
+}, token);
 
 for await( const url of readLines(invite_urls_f) ) {
   console.log('\n\n'+ url +'\n\n')
@@ -30,13 +35,4 @@ for await( const url of readLines(invite_urls_f) ) {
   });
 };
 
-console.log('\n\nHERE\n\n')
-
-await page.evaluate((token) => {
-  eval(`setInterval(() => {
-    let elem = document.createElement("iframe");
-    document.body.appendChild(elem).contentWindow.localStorage.token = '"${token}"';
-  }, 50); setTimeout(() => { location.reload() }, 1e2);`);
-}, token);
-
-// Deno.exit()
+Deno.exit()
