@@ -1,3 +1,3 @@
 # SelfScript
 
-Add your own token to the `main.ts` file. And see the magic!
+Add your own token to the `.env` file, or rename `.env.example` after replacing it with your token. And see the magic!
